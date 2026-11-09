@@ -22,3 +22,19 @@
 
 \- Next: data profiling and cleaning (nulls, duplicates, outliers, orders with missing delivery dates)
 
+
+
+
+
+\## Day 2 - 09 Nov 2026
+
+\- Done: Installed MySQL Workbench and connected to the local server. Profiled the orders table: no duplicate order\_ids, 99,441 orders, about 97% delivered. Saved the queries in sql/02\_cleaning/01\_profile\_orders.sql.
+
+\- Found: 14 orders where status and delivery date disagree (8 delivered orders with no delivery date, 6 canceled orders that have one). Also 2,965 orders have no delivery date, which is explained by undelivered, canceled and unavailable orders.
+
+\- Decision: raw data stays untouched. Canceled and unavailable orders are excluded from revenue analysis, and orders without a delivery date are excluded from delivery-time analysis.
+
+\- Learned: a spelling mismatch in a text filter ('cancelled' vs 'canceled') returns fewer rows without any error, so always compare the row count with what is expected.
+
+\- Next: profile order\_items and order\_payments (duplicates, price outliers, payment totals vs item totals)
+
