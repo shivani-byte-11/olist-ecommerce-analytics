@@ -38,3 +38,23 @@
 
 \- Next: profile order\_items and order\_payments (duplicates, price outliers, payment totals vs item totals)
 
+## Day 3 - Data profiling summary
+
+\- Done: Profiled order\_items, order\_payments and cross-checked items against payments. Queries are saved in sql/02\_cleaning (files 02 to 04).
+
+\- Found:
+
+&#x20; - order\_items: no duplicate rows, no orphan items, no zero or negative prices. Prices range from 0.85 to 6,735 (avg 120.65). The top 10 items are plausible (computers, appliances, instruments), so outliers are kept. 383 items have free shipping.
+
+&#x20; - order\_payments: credit card is about 78% of payment value. 3 payments have type not\_defined with value 0, 9 payments have value 0, and 2 payments have 0 installments. 1 delivered order has no payment record.
+
+&#x20; - Items vs payments: 98,665 orders have both, and 98,362 of them match (99.7%). Of the 303 mismatches, 264 paid more (avg +11.63, likely installment interest) and 39 paid less (avg -5.10, unexplained).
+
+&#x20; - 775 orders have no items (603 unavailable, 164 canceled, 8 other). No delivered order is missing items.
+
+\- Decisions: raw data stays untouched. Revenue = SUM(price) from order\_items, with freight shown separately. Canceled and unavailable orders are excluded. Use median alongside average because of price outliers.
+
+\- Learned: aggregate each table to one row per order before joining, otherwise rows multiply and revenue is double-counted.
+
+\- Next: build cleaned views, then the revenue and customer analysis (monthly revenue trend, top categories, repeat customers)
+
