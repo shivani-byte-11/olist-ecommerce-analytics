@@ -94,3 +94,29 @@ ilable orders.
 
 \- Next: customer analysis (repeat customers, RFM segments), then delivery time vs review score
 
+
+
+\## Day 7 - Customers
+
+\- Done: Checked customer identity, calculated the repeat purchase rate, and built an RFM-style segmentation. Queries are in sql/03\_analysis (files 06 and 07).
+
+\- Findings:
+
+&#x20; - customer\_id is created per order, so it cannot be used for customer analysis. 99,441 customer\_ids map to only 96,096 real customers (customer\_unique\_id).
+
+&#x20; - Retention is the weak spot: 94,983 customers placed valid orders, and only 2,887 (3.04%) bought more than once. Repeat customers bring 5.6% of revenue and spend about 1.9 times more per customer than one-time buyers (rough estimate).
+
+&#x20; - Customer value depends on spend more than frequency: the upper-spend half of one-time buyers is about 47.5% of customers but 78% of revenue (avg spend about R$ 233, vs about R$ 47 for the lower half).
+
+&#x20; - Biggest win-back target: 22,436 older-purchase high spenders holding 39% of revenue.
+
+&#x20; - The top customer has 16 small orders (avg about R$ 46) and is kept in the analysis.
+
+\- Definition: "recent" means the last purchase was on or after 22 Jan 2018 (the median of last-purchase dates, orders before 2018-09-01 only); "lapsed" means earlier. This is a relative cutoff, not a proven churn rule.
+
+\- Caveat: NTILE(4) forces near-equal groups, so the sizes of the four one-time segments come from the method, not from the data.
+
+\- Learned: NTILE for quartile scoring, CASE for rule-based segments, and why the ID you count by decides the answer.
+
+\- Next: delivery time vs review score (hypothesis test), then Python charts
+
