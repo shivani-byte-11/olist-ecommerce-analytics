@@ -30,7 +30,9 @@
 
 \- Done: Installed MySQL Workbench and connected to the local server. Profiled the orders table: no duplicate order\_ids, 99,441 orders, about 97% delivered. Saved the queries in sql/02\_cleaning/01\_profile\_orders.sql.
 
-\- Found: 14 orders where status and delivery date disagree (8 delivered orders with no delivery date, 6 canceled orders that have one). Also 2,965 orders have no delivery date, which is explained by undelivered, canceled and unavailable orders.
+\- Found: 14 orders where status and delivery date disagree (8 delivered orders with no delivery date, 6 canceled orders that have one). Also 2,965 orders have no delivery date, which is explained by undelivered, canceled and unava
+
+ilable orders.
 
 \- Decision: raw data stays untouched. Canceled and unavailable orders are excluded from revenue analysis, and orders without a delivery date are excluded from delivery-time analysis.
 
@@ -57,4 +59,38 @@
 \- Learned: aggregate each table to one row per order before joining, otherwise rows multiply and revenue is double-counted.
 
 \- Next: build cleaned views, then the revenue and customer analysis (monthly revenue trend, top categories, repeat customers)
+
+
+
+\## Day 4-6 - Revenue analysis
+
+\- Done: Built the vw\_order\_revenue view (98,199 valid orders, product revenue R$ 13,494,400.74, freight R$ 2,241,126.29). Then wrote the monthly revenue trend with MoM growth, year-over-year growth, top 10 categories, and a Pareto check. Queries are in sql/03\_analysis (files 01 to 05).
+
+\- Findings:
+
+&#x20; - Peak month is 2017-11 with 7,421 orders and R$ 1,003,862 revenue (+52.1% vs October).
+
+&#x20; - Revenue stalled in 2018: March to August stayed between about R$ 840K and R$ 990K per month.
+
+&#x20; - YoY growth fell from +687% (Jan 2018) to +49% (Aug 2018). Part of this is a small-base effect (Jan 2017 had only 787 orders).
+
+&#x20; - Average order value stayed between about R$ 125 and R$ 150, so growth came from more orders, not bigger orders.
+
+&#x20; - health\_beauty is the top category (9.3% of revenue), then watches\_gifts (8.9%) and bed\_bath\_table (7.7%). 18 of 74 category labels bring in 80% of revenue, and no category is above 10%.
+
+&#x20; - Items with no category ("unknown") are 1.3% of revenue.
+
+\- Decisions: the analysis window is 2017-01 to 2018-08, because 2016 months (1 to 290 orders) and 2018-09 (1 order) make growth percentages meaningless.
+
+\- Issues fixed:
+
+&#x20; - DATE\_FORMAT with %M returned month names (2017-April) and broke the ordering that LAG depends on; %m gives 2017-04. Always check that a month label sorts in calendar order.
+
+&#x20; - Two totals differed by R$ 2,007.69. The cause was a query that excluded canceled orders but not unavailable ones. When two totals disagree, compare the filters first.
+
+&#x20; - Two query files were never saved before pushing. I now run dir to confirm files exist before every commit.
+
+\- Learned: LAG(revenue, 12) gives the same month last year only when no month is missing in the window; window functions (LAG, ROW\_NUMBER, running SUM) and CTEs; aggregate before joining so rows do not multiply.
+
+\- Next: customer analysis (repeat customers, RFM segments), then delivery time vs review score
 
