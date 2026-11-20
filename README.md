@@ -84,3 +84,4 @@
 
 3\. Run `python python/02\_export\_for\_powerbi.py` to regenerate the dashboard tables, then open `dashboard/olist\_dashboard.pbix`.
 
+![Dashboard](docs/dashboard_revenue.png)
