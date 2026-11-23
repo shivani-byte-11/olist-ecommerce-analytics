@@ -87,3 +87,4 @@
 ![Dashboard](docs/dashboard_revenue.png)
 ![Customers](docs/dashboard_customers.png)
 ![Delivery](docs/dashboard_delivery.png)
+[Dashboard PDF](docs/olist_dashboard.pdf)
