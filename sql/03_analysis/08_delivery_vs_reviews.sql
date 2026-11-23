@@ -9,6 +9,8 @@
 -- scores; this does not prove it is the only cause.
 
 -- Check: does an order have more than one review row?
+-- Result: 99,224 review rows, 98,673 orders with reviews (547 orders have 2+ reviews).
+-- That is why reviews are averaged per order below.
 SELECT COUNT(*) AS review_rows,
        COUNT(DISTINCT order_id) AS orders_with_reviews
 FROM order_reviews;
