@@ -120,3 +120,41 @@ ilable orders.
 
 \- Next: delivery time vs review score (hypothesis test), then Python charts
 
+
+
+\## Day 8 - Delivery vs reviews
+
+\- Done: Compared review scores of on-time and late delivered orders in SQL (sql/03\_analysis/08\_delivery\_vs\_reviews.sql), then repeated it in Python with a hypothesis test and a chart (python/01\_delivery\_vs\_reviews.py, docs/delivery\_vs\_reviews.png).
+
+\- Findings (95,824 delivered orders with a review; late = after the estimated delivery date):
+
+&#x20; - On time or early: 89,443 orders, average review 4.29, 9.2% low reviews (1-2 stars).
+
+&#x20; - 1-7 days late: 3,600 orders, average review 2.72, 49.4% low reviews.
+
+&#x20; - 8+ days late: 2,781 orders, average review 1.70, 79.2% low reviews.
+
+&#x20; - Median review is 5 for on-time orders and 1 for late orders. Mann-Whitney U test: p < 0.001. An on-time order scores higher than a late one in about 82% of random pairs (ties counted as half).
+
+&#x20; - Late orders are about 6.7% of the total, but their reviews are much lower.
+
+\- Caveat: this shows late delivery is associated with lower scores, not that it is the only cause. Only customers who left a review are included.
+
+\- Learned: SQL and Python gave identical numbers, which is a good cross-check. With a large sample the p-value is always tiny, so the effect size and medians matter more. Never store a password in code: the script asks for it with getpass.
+
+\- Next: Power BI dashboard (Revenue, Customers, Delivery pages)
+
+
+
+\## Day 8-11
+
+\- Built delivery vs reviews analysis (4.29 vs 1.70 avg review, 79.2% low reviews for 8+ days late).
+
+\- Python test (Mann-Whitney) confirmed the gap, p < 0.001.
+
+\- Built 3-page Power BI dashboard (Revenue, Customers, Delivery).
+
+\- Mistakes fixed: table column names got mismatched in Power BI, rebuilt the table. Checked 547 orders with multiple reviews, query already averages per order.
+
+\- Checked category concentration: top 3 categories are only 25.8% of revenue, so dropped the "concentration" recommendation.
+
