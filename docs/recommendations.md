@@ -32,6 +32,16 @@
 
 
 
+\## 4. Focus delivery fixes on Rio de Janeiro and Bahia first
+
+\- Finding: 6.8% of delivered orders arrive after the estimate. Rio de Janeiro (RJ) has 12.1% late orders and Bahia (BA) has 12.2%, about 1.8 times the average. RJ alone has 22.9% of all late orders with 12.8% of orders. Sao Paulo, the largest market, is at 4.5%.
+
+\- Action: Review carriers and estimated delivery dates in RJ and BA first, and set more realistic estimates there.
+
+\- Measure: Late order share in RJ and BA, and average review score of orders from these states.
+
+
+
 \## Limits
 
 \- Late delivery is linked to low reviews, which does not prove it is the only cause.
@@ -39,4 +49,6 @@
 \- Review scores for 547 orders with multiple reviews are averaged per order.
 
 \- Category shares use delivered orders only, so the total is slightly below the dashboard revenue.
+
+\- State is the customer's state, and late share by state shows correlation, not cause.
 
