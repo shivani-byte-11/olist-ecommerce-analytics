@@ -151,6 +151,19 @@ QUERIES = {
         GROUP BY delivery_bucket
         ORDER BY delivery_bucket
     """,
+    "state_delivery": """
+        SELECT c.customer_state AS state,
+               COUNT(*)         AS orders,
+               SUM(DATEDIFF(o.order_delivered_customer_date, o.order_estimated_delivery_date) > 0) AS late_orders,
+               ROUND(100 * AVG(DATEDIFF(o.order_delivered_customer_date, o.order_estimated_delivery_date) > 0), 1) AS late_pct
+        FROM orders o
+        JOIN customers c ON o.customer_id = c.customer_id
+        WHERE o.order_status = 'delivered'
+          AND o.order_delivered_customer_date IS NOT NULL
+        GROUP BY c.customer_state
+        HAVING COUNT(*) >= 500
+        ORDER BY late_pct DESC
+    """,
 }
 
 
