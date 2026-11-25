@@ -4,7 +4,7 @@
 
 ## 1. Win back high-spend lapsed customers
 
-- Finding: Only about 3% of customers ordered more than once. 22,436 lapsed customers had above-average spend.
+- Finding: Only 3.04% of customers (2,887 of 94,983) bought more than once. 22,436 one-time customers in the upper-spend half, whose last purchase was before 22 Jan 2018, hold about 39% of revenue.
 
 - Action: Run a win-back offer (discount or free shipping) targeted at this group first, not all customers.
 
@@ -51,5 +51,6 @@
 - Category shares use delivered orders only, so the total is slightly below the dashboard revenue.
 
 - State is the customer's state, and late share by state shows correlation, not cause.
+
 
 
