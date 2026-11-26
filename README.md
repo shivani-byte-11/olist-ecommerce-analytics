@@ -89,3 +89,12 @@
 ![Delivery](docs/dashboard_delivery.png)
 [Dashboard PDF](docs/olist_dashboard.pdf)
 
+## State-wise findings
+
+- **Revenue is concentrated by state:** Sao Paulo (SP) brings 38.3% of product revenue, and SP, RJ and MG together bring 63.3%.
+- **Late delivery is not even across states:** 6.8% of delivered orders arrive after the estimate (6,534 of 96,470). Rio de Janeiro (RJ) has 12.1% late and Bahia (BA) has 12.2%, about 1.8 times the average. RJ has 12.8% of orders but 22.9% of all late orders.
+- **The biggest market is fine:** SP has the most late orders (1,820) but only 4.5% late, below average.
+- **Caveat:** state is the customer's state, and this shows where late delivery is high, not why.
+
+Queries: `sql/03_analysis/09_state_analysis.sql`. Recommendations: `docs/recommendations.md`.
+
