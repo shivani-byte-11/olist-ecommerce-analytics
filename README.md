@@ -88,6 +88,7 @@
 ![Customers](docs/dashboard_customers.png)
 ![Delivery](docs/dashboard_delivery.png)
 [Dashboard PDF](docs/olist_dashboard.pdf)
+Note: the year slicer on the Revenue page filters the monthly trend and table only.
 
 ## State-wise findings
 
